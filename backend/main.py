@@ -156,4 +156,6 @@ async def generate_content(request: ContentRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    port = int(os.getenv("PORT", 8000))  # Railway 会自动注入 PORT 变量
+    uvicorn.run(app, host="0.0.0.0", port=port)
