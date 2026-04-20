@@ -153,3 +153,7 @@ async def generate_content(request: ContentRequest):
         idea = f"工作流执行失败，错误详情：{str(e)}"
     elapsed_time = round(time.time() - start_time, 3)
     return ContentResponse(status=status, idea=idea, processing_time=elapsed_time)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
