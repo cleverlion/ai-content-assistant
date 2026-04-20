@@ -52,8 +52,6 @@ class ContentResponse(BaseModel):
     idea: str
     processing_time: float
 
-# 实例化 Tavily 客户端（如果需要使用 Tavily 的功能，可以在节点函数中调用）
-tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 # ==================== 定义 LangGraph 工作流 ====================
 # 1. 定义节点函数
@@ -63,6 +61,8 @@ def researcher_node(state: AgentState) -> AgentState:
     # 调用 Tavily 搜索相关资料（示例，实际使用时根据需要调整）
     search_result = None
     retry_count = 0
+    # 实例化 Tavily 客户端（如果需要使用 Tavily 的功能，可以在节点函数中调用）
+    tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
     while retry_count < 2:
         try:
             search_result = tavily.search(query=state['topic'], max_results=3, include_raw_content=False)
